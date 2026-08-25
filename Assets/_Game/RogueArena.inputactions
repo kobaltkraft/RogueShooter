@@ -21,5 +21,5 @@
     {"id":"8d23ea15-f199-43e0-81b4-85a71dd6c4ad","path":"<Keyboard>/leftCtrl","action":"Crouch"},
     {"id":"ad887825-897c-4f4f-a1a0-dca928595a3a","path":"<Keyboard>/r","action":"Reload"},
     {"id":"c7f24d88-9a31-4b5e-b812-0e4f7a9d3c15","path":"<Keyboard>/q","action":"Dash"},
-    {"id":"d8e35f99-ab42-5c6f-c923-1f5g8b0e4d26","path":"<Gamepad>/buttonSouth","action":"Dash"}]}]
+    {"id":"d8e35f99-ab42-5c6f-c923-1f5c8b0e4d26","path":"<Gamepad>/buttonSouth","action":"Dash"}]}]
 }

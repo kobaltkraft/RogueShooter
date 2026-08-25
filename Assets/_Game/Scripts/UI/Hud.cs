@@ -109,7 +109,7 @@ namespace RogueArena.UI
 
             weapons = Services.Session.Weapons;
             vitals = Services.Session.Vitals;
-            powerups = Services.Session.Powerups;
+            powerups = Services.Session.Player != null ? Services.Session.Player.GetComponent<PlayerPowerups>() : null;
             dash = Services.Session.Player != null ? Services.Session.Player.GetComponent<DashController>() : null;
 
             if (weapons != null)
