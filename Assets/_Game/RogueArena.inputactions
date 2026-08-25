@@ -6,7 +6,8 @@
     {"name":"Jump","type":"Button","id":"89aed13c-8611-4415-ac1e-c98bbab8b1f9"},
     {"name":"Sprint","type":"Button","id":"9382c960-4006-4627-93f8-cd5df91b50c4"},
     {"name":"Crouch","type":"Button","id":"7374493a-0c46-4a29-96c2-54ca5e57bcad"},
-    {"name":"Reload","type":"Button","id":"93406422-c120-465f-ab56-33cd8b354edd"}],
+    {"name":"Reload","type":"Button","id":"93406422-c120-465f-ab56-33cd8b354edd"},
+    {"name":"Dash","type":"Button","id":"b3a17c94-5e80-4f12-9c3d-7a1b2f8e6d09"}],
   "bindings":[
     {"name":"WASD","id":"1d82340f-f915-46a2-b5cf-6e67e437f758","path":"2DVector","action":"Move","isComposite":true},
     {"name":"up","id":"41f7e520-32a5-4d8d-b509-1a9971c22257","path":"<Keyboard>/w","action":"Move","isPartOfComposite":true},
@@ -18,5 +19,7 @@
     {"id":"99434565-e63e-409b-bdc0-78cfbab6b09c","path":"<Keyboard>/space","action":"Jump"},
     {"id":"09896929-4300-4624-a27f-a88595594b64","path":"<Keyboard>/leftShift","action":"Sprint"},
     {"id":"8d23ea15-f199-43e0-81b4-85a71dd6c4ad","path":"<Keyboard>/leftCtrl","action":"Crouch"},
-    {"id":"ad887825-897c-4f4f-a1a0-dca928595a3a","path":"<Keyboard>/r","action":"Reload"}]}]
+    {"id":"ad887825-897c-4f4f-a1a0-dca928595a3a","path":"<Keyboard>/r","action":"Reload"},
+    {"id":"c7f24d88-9a31-4b5e-b812-0e4f7a9d3c15","path":"<Keyboard>/q","action":"Dash"},
+    {"id":"d8e35f99-ab42-5c6f-c923-1f5g8b0e4d26","path":"<Gamepad>/buttonSouth","action":"Dash"}]}]
 }
