@@ -61,6 +61,7 @@ namespace RogueArena.Weapons
             p.source = source;
             p.alive = true;
             p.tracerColor = settings.tracerColor;
+            p.impactSfx = settings.impactSfx;
 
             p.SetupVisual(settings);
             return p;

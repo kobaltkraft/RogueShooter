@@ -187,6 +187,11 @@ namespace RogueArena.Audio
                 case "stinger_victory": return StingerVictory();
                 case "stinger_defeat": return StingerDefeat();
 
+                // Runtime aliases: GameFlow/Progression play bare ids.
+                case "victory": return StingerVictory();
+                case "defeat": return StingerDefeat();
+                case "unlock": return Unlock();
+
                 default:
                     Debug.LogWarning($"[SfxSynth] Unknown clip id '{id}', using silence.");
                     return Bake("silence", new float[220]);
@@ -803,6 +808,14 @@ namespace RogueArena.Audio
             Distort(b, 1.2f);
             LowPass(b, .65f);
             return Bake("music_boss", b, .65f);
+        }
+
+        static AudioClip Unlock()
+        {
+            var b = NewBuffer(.45f);
+            AddTone(b, 0, (int)(.18f * Rate), 659.25f, 659.25f, .4f, WaveForm.Sine, 6f);
+            AddTone(b, (int)(.11f * Rate), (int)(.3f * Rate), 987.77f, 987.77f, .35f, WaveForm.Triangle, 6f);
+            return Bake("unlock", b);
         }
 
         static AudioClip StingerVictory()

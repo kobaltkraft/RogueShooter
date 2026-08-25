@@ -144,7 +144,7 @@ namespace RogueArena.Progression
             if (!damagedThisWave)
             {
                 wavesClearedNoDamage++;
-                Bump("untouchable", _ => 1);
+                Bump("untouchable");
             }
         }
 
@@ -157,7 +157,7 @@ namespace RogueArena.Progression
         void OnBossDefeated(string bossName, bool wasFinal)
         {
             bossActive = false;
-            Bump("boss_slayer", _ => 1);
+            Bump("boss_slayer");
 
             if (!healedDuringBoss)
             {
