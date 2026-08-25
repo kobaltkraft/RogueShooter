@@ -6,6 +6,15 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/_Game/Scenes/RogueArena.unity
-    guid: 11111111111111111111111111111111
+    path: Assets/_Game/Scenes/MainMenu.unity
+    guid: aa1b1922b86241d3b0dfff04166d459f
+  - enabled: 1
+    path: Assets/_Game/Scenes/Arena_Industrial.unity
+    guid: fec0cd49627f4d149e668223df919888
+  - enabled: 1
+    path: Assets/_Game/Scenes/Arena_Desert.unity
+    guid: bc1a4d83bfc5478ca9632be8975b18d1
+  - enabled: 1
+    path: Assets/_Game/Scenes/Arena_City.unity
+    guid: 1a863dc29b5c46eb927842f100c8b7b6
   m_configObjects: {}

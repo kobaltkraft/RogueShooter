@@ -1,0 +1,193 @@
+
+=== 1. Structure / compile risk ===
+  PASS  all core scripts present
+  PASS  balanced braces/parens in all scripts
+  PASS  no FindObjectOfType (use FindAnyObjectByType)
+  PASS  no FindObjectsOfType (use FindObjectsByType)
+  PASS  no Object.FindObjectOfType
+  PASS  Camera.main only in Weapon bind fallback
+
+=== 2. Hot-path hygiene ===
+  PASS  no allocations / uncached GetComponent in Update loops
+  PASS  no .material assignment inside Update (instance leak)
+
+=== 3. Event subscription hygiene ===
+  PASS  GameEvents.ResetAll only called at root teardown
+  PASS  scene objects unsubscribe from every GameEvents subscription
+  PASS  scene subscribers implement OnDestroy teardown
+  PASS  Core/GameFlow.cs has teardown at root destruction (Dispose or ResetAll)
+  PASS  Core/ScoreService.cs has teardown at root destruction (Dispose or ResetAll)
+  PASS  Progression/ChallengeService.cs has teardown at root destruction (Dispose or ResetAll)
+  PASS  Progression/ProgressionService.cs has teardown at root destruction (Dispose or ResetAll)
+
+=== 4. Damage & health ===
+  PASS  armor absorb constant parsed
+  PASS  TakeDamage ignores non-positive damage in source
+  PASS  Heal ignores non-positive amount in source
+  PASS  lethal hit kills from full health
+  PASS  damage after death is a no-op
+  PASS  armor absorbs armorAbsorb fraction
+  PASS  oversized hit drains armor then health
+  PASS  three hits same frame accumulate correctly
+  PASS  Died event invoked from exactly one code path
+  PASS  headshot damage uses Definition.headshotMultiplier
+  PASS  HitZone marks head colliders
+  PASS  explosion dedups per-IDamageable
+  PASS  explosion edge falloff present
+  PASS  explosion edge deals 40% damage
+  PASS  explosion centre deals full damage
+
+=== 5. Weapons & ammo ===
+  PASS  8 weapons registered
+  PASS  weapon ids unique
+  PASS  rifle: positive damage/rate/mag/reload
+  PASS  rifle: reserve >= 2 full magazines
+  PASS  rifle: headshot multiplier >= 1
+  PASS  rifle: sustained DPS in sane range (10-400)
+  PASS  shotgun: positive damage/rate/mag/reload
+  PASS  shotgun: reserve >= 2 full magazines
+  PASS  shotgun: headshot multiplier >= 1
+  PASS  shotgun: sustained DPS in sane range (10-400)
+  PASS  rocket: positive damage/rate/mag/reload
+  PASS  rocket: reserve >= 2 full magazines
+  PASS  rocket: headshot multiplier >= 1
+  PASS  rocket: sustained DPS in sane range (10-400)
+  PASS  smg: positive damage/rate/mag/reload
+  PASS  smg: reserve >= 2 full magazines
+  PASS  smg: headshot multiplier >= 1
+  PASS  smg: sustained DPS in sane range (10-400)
+  PASS  burst: positive damage/rate/mag/reload
+  PASS  burst: reserve >= 2 full magazines
+  PASS  burst: headshot multiplier >= 1
+  PASS  burst: sustained DPS in sane range (10-400)
+  PASS  marksman: positive damage/rate/mag/reload
+  PASS  marksman: reserve >= 2 full magazines
+  PASS  marksman: headshot multiplier >= 1
+  PASS  marksman: sustained DPS in sane range (10-400)
+  PASS  plasma: heat weapon has heat/cooldown/lockout
+  PASS  plasma: heat weapon has no magazine fields
+  PASS  plasma: headshot multiplier >= 1
+  PASS  plasma: sustained DPS in sane range (10-400)
+  PASS  grenade: positive damage/rate/mag/reload
+  PASS  grenade: reserve >= 2 full magazines
+  PASS  grenade: headshot multiplier >= 1
+  PASS  grenade: sustained DPS in sane range (10-400)
+  PASS  dry-fire when magazine empty is guarded
+  PASS  FinishReload takes min(need, reserve)
+  PASS  AddAmmo caps reserve
+  PASS  reload uses absolute time (pause-safe)
+
+=== 6. Upgrade stacking ===
+  PASS  track multiplier formulas parse
+  PASS  max tiers parse (damage 3, magazine 2, reload 2)
+  PASS  damage tier 3 = +45% (rifle 16 -> 23.2)
+  PASS  magazine tier 2 = +100%
+  PASS  reload tier 2 = -40%
+  PASS  reload multiplier stays positive at max tier
+  PASS  WeaponUpgradeTier clamps to MaxTier
+  PASS  PlayerUpgradeTier clamps to maxTier
+  PASS  damage upgrade cost escalates with tier
+
+=== 7. Score & combo ===
+  PASS  combo multiplier formula parses
+  PASS  combo window parses
+  PASS  combo x1 at zero kills
+  PASS  combo caps at 20 kills (x3)
+  PASS  combo caps beyond 20 kills (no x4)
+  PASS  combo step is +10% per kill
+  PASS  combo is reset by timeout in source
+  PASS  score uses long accumulation
+  PASS  combo counts clamp upward only
+  PASS  score adds base * combo multiplier
+
+=== 8. Wave generation & progression ===
+  PASS  maxAlive formula parses
+  PASS  elite chance formula parses
+  PASS  budget formula parses
+  PASS  waves 1-30: alive<=24, eliteChance<=.45, budget grows
+  PASS  wave 1 spawns a non-empty budget
+  PASS  elite chance reaches cap exactly at wave 20
+  PASS  spawn loop respects alive cap in source
+  PASS  boss wave skips elite/hardened modifiers
+  PASS  never-completing wave self-heals (watchdog)
+  PASS  boss death fires exactly once (dying flag)
+  PASS  boss StopAllCoroutines on death
+  PASS  boss spawn snaps to NavMesh
+
+=== 9. Difficulty scaling ===
+  PASS  difficultyScalePerWave values parse
+  PASS  time attack scales slower than endless
+  PASS  difficulty at wave 1 is exactly 1.0
+  PASS  endless wave 30 ~ x3.32
+  PASS  difficulty finite & > 1 for wave > 1
+  PASS  survival has 11 authored combat waves (1-10 + finale)
+  PASS  authored waves numbered 1-10 then finale 12
+  PASS  authored elite chance monotonic non-decreasing
+  PASS  boss wave is wave 11 with 7s prep
+  PASS  SpawnScaled guards null definition
+  PASS  spawner enforces global enemy cap
+  PASS  global enemy cap is 34
+
+=== 10. Save serialization ===
+  PASS  save version constant exists
+  PASS  atomic write via temp file + swap
+  PASS  corrupt save falls back to defaults
+  PASS  backup file written
+  PASS  save JSON round-trip preserves all fields
+  PASS  save JSON round-trip preserves nested lists
+  PASS  all persisted counters clamped non-negative
+  PASS  settings volumes clamped 0-1
+  PASS  level clamped to >= 1
+  PASS  hand-edited negative currency/level clamped
+
+=== 11. Layers & physics ===
+  PASS  gameplay layers 6..13 defined
+  PASS  bullet mask excludes player projectiles (no self-shot)
+  PASS  bullet mask excludes enemy projectiles
+  PASS  enemy projectile mask excludes enemies (no friendly fire)
+  PASS  occluder mask excludes player (walls don't hide the player)
+  PASS  vision mask includes player (enemies can see the player)
+  PASS  projectile skips its owner's layer
+  PASS  projectile pool disposed on scene exit
+
+=== 12. Enemy definitions ===
+  PASS  11 enemy kinds registered
+  PASS  enemy kinds match design set
+  PASS  Grunt: hp/speed/cost/minWave/score sane
+  PASS  Rusher: hp/speed/cost/minWave/score sane
+  PASS  Soldier: hp/speed/cost/minWave/score sane
+  PASS  Assault: hp/speed/cost/minWave/score sane
+  PASS  Shotgunner: hp/speed/cost/minWave/score sane
+  PASS  Sniper: hp/speed/cost/minWave/score sane
+  PASS  Medic: hp/speed/cost/minWave/score sane
+  PASS  Explosive: hp/speed/cost/minWave/score sane
+  PASS  Heavy: hp/speed/cost/minWave/score sane
+  PASS  Tank: hp/speed/cost/minWave/score sane
+  PASS  Drone: hp/speed/cost/minWave/score sane
+  PASS  wave-1 enemies fit the wave-1 budget (4+1.6)
+  PASS  at least two melee archetypes exist
+  PASS  exactly one healer archetype
+
+=== 13. Pooling & memory ===
+  PASS  pool has max instance cap
+  PASS  pool rejects double-return
+  PASS  projectile pool is a static reusable queue
+  PASS  projectile pool skips destroyed entries
+  PASS  projectile pool grows on demand and is capped by usage
+  PASS  Lit/Emissive materials cached by name (no per-pickup leak)
+  PASS  sprite materials cached by colour
+  PASS  no unintended mutable static fields
+
+=== 14. Game-state conflicts ===
+  PASS  flow pause delegates to the state machine guard
+  PASS  state machine refuses pause outside gameplay states
+  PASS  restart re-entrant guarded
+  PASS  state machine defines all gameplay states
+  PASS  TimeController reason-dictated (min wins)
+  PASS  jump blocked while crouched
+  PASS  player ResetState exists for restarts
+  PASS  player death publishes once
+
+============================================================
+RESULT: 161 passed, 0 failed, 0 warnings
+============================================================
