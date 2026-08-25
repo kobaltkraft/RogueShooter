@@ -12,8 +12,9 @@ namespace RogueArena.Factories
         public readonly Transform Transform;
         public readonly Health Health;
         public readonly HitscanWeapon Weapon;
-        public PlayerAssembly(Transform transform, Health health, HitscanWeapon weapon)
-        { Transform = transform; Health = health; Weapon = weapon; }
+        public readonly DashController Dash;
+        public PlayerAssembly(Transform transform, Health health, HitscanWeapon weapon, DashController dash)
+        { Transform = transform; Health = health; Weapon = weapon; Dash = dash; }
     }
 
     public static class PlayerFactory
@@ -34,7 +35,8 @@ namespace RogueArena.Factories
             Camera camera = CreateCamera(root.transform);
             controller.Initialize(camera.transform);
             HitscanWeapon weapon = CreateWeapon(camera, input);
-            return new PlayerAssembly(root.transform, health, weapon);
+            DashController dash = CreateDash(root);
+            return new PlayerAssembly(root.transform, health, weapon, dash);
         }
 
         static Camera CreateCamera(Transform parent)
@@ -44,6 +46,7 @@ namespace RogueArena.Factories
             cameraObject.transform.localPosition = new Vector3(0, 1.62f, 0);
             Camera camera = cameraObject.AddComponent<Camera>();
             camera.nearClipPlane = .05f;
+            camera.fieldOfView = 75;
             cameraObject.AddComponent<AudioListener>();
             return camera;
         }
@@ -61,6 +64,27 @@ namespace RogueArena.Factories
             HitscanWeapon weapon = gun.AddComponent<HitscanWeapon>();
             weapon.Initialize(definition, camera, input, flash);
             return weapon;
+        }
+
+        static DashController CreateDash(GameObject root)
+        {
+            // Build a default DashDefinition at runtime so the dash works
+            // out-of-the-box. Designers can later replace this with an asset.
+            DashDefinition def = ScriptableObject.CreateInstance<DashDefinition>();
+            def.distance = 6f;
+            def.duration = .18f;
+            def.speedCurve = AnimationCurve.EaseInOut(0, 0, 1, 1);
+            def.cooldownBeforeRecharge = .4f;
+            def.rechargeTime = 2.5f;
+            def.maxCharges = 1;
+            def.allowAirDash = false;
+            def.liftHeight = .15f;
+            def.fovKick = 8f;
+            def.fovKickSpeed = 12f;
+
+            DashController dash = root.AddComponent<DashController>();
+            dash.Initialize(def);
+            return dash;
         }
     }
 }
