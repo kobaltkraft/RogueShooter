@@ -3,7 +3,11 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 3
-  tags: []
+  tags:
+  - Player
+  - Enemy
+  - Boss
+  - Explosive
   layers:
   - Default
   - TransparentFX
@@ -11,14 +15,14 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Environment
+  - Enemies
+  - PlayerBody
+  - PlayerProjectiles
+  - EnemyProjectiles
+  - Pickups
+  - Hazards
+  - Debris
   - 
   - 
   - 
