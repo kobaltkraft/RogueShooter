@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 using RogueArena.Audio;
+using RogueArena.Core;
 
 namespace RogueArena.Persistence
 {

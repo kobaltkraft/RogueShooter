@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using RogueArena.AI;
 using RogueArena.Core;
 using RogueArena.Player;
 using RogueArena.Visual;

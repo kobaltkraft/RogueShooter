@@ -3,8 +3,10 @@ using UnityEngine;
 using UnityEngine.UI;
 using RogueArena.Content;
 using RogueArena.Core;
+using RogueArena.Environment;
 using RogueArena.Progression;
 using RogueArena.Weapons;
+using RogueArena.Waves;
 
 namespace RogueArena.UI
 {

@@ -7,6 +7,7 @@ using RogueArena.Content;
 using RogueArena.Environment;
 using RogueArena.Pickups;
 using RogueArena.Player;
+using RogueArena.Visual;
 using RogueArena.Weapons;
 using RogueArena.Waves;
 

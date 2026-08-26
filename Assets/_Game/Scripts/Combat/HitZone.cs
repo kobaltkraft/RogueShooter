@@ -8,14 +8,14 @@ namespace RogueArena.Combat
     /// Marks a collider as a headshot zone. Falls back to collider name "Head"
     /// for compatibility with the original prototype enemy.
     /// </summary>
-    public class HitZone : MonoBehaviour
+    public class HitZoneMarker : MonoBehaviour
     {
         public HitZone zone = HitZone.Head;
 
         public static bool IsHead(Collider collider)
         {
             if (collider == null) return false;
-            var marker = collider.GetComponent<HitZone>();
+            var marker = collider.GetComponent<HitZoneMarker>();
             if (marker != null) return marker.zone == HitZone.Head;
             return collider.name == "Head";
         }

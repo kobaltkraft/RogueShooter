@@ -14,13 +14,13 @@ namespace RogueArena.Player
     public class PlayerPowerups : MonoBehaviour
     {
         /// <summary>One active timed powerup (HUD reads this).</summary>
-        public struct Active
+        public struct ActivePowerup
         {
             public PowerupDefinition Definition;
             public float Remaining;
         }
 
-        readonly List<Active> active = new List<Active>();
+        readonly List<ActivePowerup> active = new List<ActivePowerup>();
 
         public float DamageMultiplier { get; private set; } = 1f;
         public float FireRateMultiplier { get; private set; } = 1f;
@@ -31,7 +31,7 @@ namespace RogueArena.Player
         public int ActiveCount => active.Count;
 
         /// <summary>Read-only view for the HUD.</summary>
-        public IReadOnlyList<Active> Active => active;
+        public IReadOnlyList<ActivePowerup> Active => active;
 
         public void Apply(PowerupDefinition definition)
         {
@@ -49,13 +49,13 @@ namespace RogueArena.Player
             {
                 if (active[i].Definition.id == definition.id)
                 {
-                    active[i] = new Active { Definition = definition, Remaining = definition.duration };
+                    active[i] = new ActivePowerup { Definition = definition, Remaining = definition.duration };
                     GameEvents.PowerupStarted?.Invoke(definition.id, definition.displayName, definition.duration, definition.color);
                     return;
                 }
             }
 
-            active.Add(new Active { Definition = definition, Remaining = definition.duration });
+            active.Add(new ActivePowerup { Definition = definition, Remaining = definition.duration });
             Recompute();
             GameEvents.PowerupStarted?.Invoke(definition.id, definition.displayName, definition.duration, definition.color);
         }
@@ -67,7 +67,7 @@ namespace RogueArena.Player
             bool changed = false;
             for (int i = active.Count - 1; i >= 0; i--)
             {
-                Active a = active[i];
+                ActivePowerup a = active[i];
                 a.Remaining -= Time.deltaTime;
                 if (a.Remaining <= 0f)
                 {
@@ -84,7 +84,7 @@ namespace RogueArena.Player
         {
             float damage = 1f, fireRate = 1f, speed = 1f;
             bool infinite = false;
-            foreach (Active a in active)
+            foreach (ActivePowerup a in active)
             {
                 switch (a.Definition.kind)
                 {
@@ -103,7 +103,7 @@ namespace RogueArena.Player
 
         public float RemainingFor(string id)
         {
-            foreach (Active a in active)
+            foreach (ActivePowerup a in active)
                 if (a.Definition.id == id) return a.Remaining;
             return 0f;
         }

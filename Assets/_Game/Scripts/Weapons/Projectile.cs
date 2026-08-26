@@ -195,7 +195,7 @@ namespace RogueArena.Weapons
             }
             else
             {
-                bool head = HitZone.IsHead(hit.collider);
+                bool head = HitZoneMarker.IsHead(hit.collider);
                 if (damageable != null && damageable.IsAlive)
                 {
                     damageable.TakeDamage(new DamageInfo(damage, hit.point, velocity.normalized,
