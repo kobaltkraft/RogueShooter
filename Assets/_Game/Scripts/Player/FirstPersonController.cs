@@ -300,7 +300,7 @@ namespace RogueArena.Player
             {
                 // Air control: steer without exceeding the current speed budget.
                 Vector3 target = wishDir * (targetSpeed * inputMag);
-                float accel = inputMag > .01f ? airAccel : airDecel;
+                float accel = (inputMag > .01f ? airAccel : airDecel) * airControl;
                 Vector3 desired = Vector3.MoveTowards(horizontalVelocity, target, accel * dt);
 
                 // Only allow the air steering to change direction, not to add speed

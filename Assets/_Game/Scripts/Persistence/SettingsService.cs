@@ -78,7 +78,16 @@ namespace RogueArena.Persistence
         public void SetHeadBob(bool value) { Data.headBob = value; save.MarkDirty(); Applied?.Invoke(); }
         public void SetScreenShake(bool value) { Data.screenShake = value; save.MarkDirty(); Applied?.Invoke(); }
         public void SetShowFps(bool value) { Data.showFps = value; save.MarkDirty(); Applied?.Invoke(); }
-        public void SetCrosshair(string id) { Data.crosshair = id; save.MarkDirty(); Applied?.Invoke(); }
+        public void SetCrosshair(string id)
+        {
+            // The selected crosshair cosmetic lives on the progression block
+            // (it is a cosmetic unlock, not a gameplay setting).
+            var progress = save.Data?.progress;
+            if (progress == null) return;
+            progress.crosshair = id;
+            save.MarkDirty();
+            Applied?.Invoke();
+        }
 
         // ------------------------------------------------------------------ quality
 

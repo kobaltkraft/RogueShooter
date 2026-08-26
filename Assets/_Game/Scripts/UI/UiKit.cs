@@ -202,7 +202,7 @@ namespace RogueArena.UI
             slider.fillRect = fillImage.rectTransform;
             slider.handleRect = handle.rectTransform;
             slider.targetGraphic = handle;
-            slider.direction = Slider.Direction.LeftToRight;
+            slider.direction = UnityEngine.UI.Slider.Direction.LeftToRight;
             slider.minValue = 0f;
             slider.maxValue = 1f;
             slider.value = value01;

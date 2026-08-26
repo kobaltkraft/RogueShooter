@@ -313,7 +313,7 @@ namespace RogueArena.Waves
             wave.waveNumber = waveNumber;
             wave.prepTime = Mathf.Lerp(5f, 3f, Mathf.Clamp01(waveNumber / 20f));
             wave.spawnInterval = Mathf.Lerp(.45f, .25f, Mathf.Clamp01(waveNumber / 20f));
-            wave.maxAlive = Mathf.ClampToInt(10 + waveNumber, 10, 24);
+            wave.maxAlive = Mathf.Clamp(10 + waveNumber, 10, 24);
             wave.eliteChance = Mathf.Clamp(.05f + waveNumber * .02f, 0f, .45f);
             wave.eliteMaxModifiers = waveNumber >= 10 ? 2 : 1;
 
