@@ -19,6 +19,23 @@ namespace RogueArena.EditorTools
         [MenuItem("Tools/Rogue Arena/Validate Project")]
         public static void ValidateAll()
         {
+            ValidateInternal(showDialog: true);
+        }
+
+        /// <summary>
+        /// Batch-mode entry point used by Tools/RunUnityCompatibilityMatrix.py.
+        /// Every editor in the support matrix compiles the project and invokes
+        /// this method in an isolated copy of the checkout.
+        /// </summary>
+        public static void ValidateForCi()
+        {
+            int errors = ValidateInternal(showDialog: false);
+            if (Application.isBatchMode)
+                EditorApplication.Exit(errors == 0 ? 0 : 1);
+        }
+
+        static int ValidateInternal(bool showDialog)
+        {
             int errors = 0;
             int warnings = 0;
             var log = new System.Text.StringBuilder();
@@ -59,6 +76,9 @@ namespace RogueArena.EditorTools
                 int found = LayerMask.NameToLayer(pair.Value);
                 if (found != pair.Key) Error($"layer '{pair.Value}' not on slot {pair.Key} (found slot {found})");
             }
+
+            // ---- Unity editor/package compatibility ----
+            UnityCompatibility.Validate(Info, Error);
 
             // ---- URP ----
             var graphics = UnityEngine.Rendering.GraphicsSettings.currentRenderPipeline;
@@ -145,12 +165,14 @@ namespace RogueArena.EditorTools
                 : $"<color=#FF6A5E>VALIDATION FAILED — {errors} error(s), {warnings} warning(s)</color>");
 
             Debug.Log(log.ToString());
-            if (errors > 0)
+            if (showDialog && errors > 0)
                 EditorUtility.DisplayDialog("Rogue Arena Validation",
                     $"Validation failed with {errors} error(s) and {warnings} warning(s).\nSee the Console for details.", "OK");
-            else
+            else if (showDialog)
                 EditorUtility.DisplayDialog("Rogue Arena Validation",
                     $"All checks passed ({warnings} warning(s)).", "OK");
+
+            return errors;
         }
     }
 }

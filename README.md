@@ -4,8 +4,15 @@ A complete, original arcade first-person shooter built with Unity 6, URP, the In
 
 ## Open and play
 
-1. Install **Unity 6.0 (6000.0.58f2 or a compatible Unity 6 LTS)**.
-2. Open this repository as a project (Package Manager restores URP, Input System, AI Navigation).
+1. Install one of the supported Unity editors:
+
+   | Unity editor | Changeset |
+   |---|---|
+   | **6000.0.58f2** | `92dee566b325` |
+   | **6000.3.22f1** | `1c726e1fb402` |
+   | **6000.5.9f1** | `b57deb96f08d` |
+
+2. Open this repository as a project (Package Manager restores the shared, pinned URP, Input System, AI Navigation and uGUI versions).
 3. Open **any** scene — `Assets/_Game/Scenes/MainMenu.unity` is the intended entry — and press **Play**.
    - The persistent `SystemRoot` bootstraps itself automatically (even in play-in-scene).
    - Opening an `Arena_*` scene directly auto-starts a Survival run in that arena.
@@ -48,10 +55,34 @@ Every arena has AI cover points, spawn points, weapon/powerup pads, explosive ba
 - **Audio** — fully procedural synthesis (~55 clips): weapons, impacts, explosions, enemy calls, UI, stingers and layered music, with category volumes and voice limiting
 - **Visuals** — consistent material library, emissive accent lighting, subtle bloom + vignette, distinct silhouette language, hit flashes and death bursts
 
+## Unity version compatibility
+
+`6000.0.58f2` is intentionally the serialized project baseline. Both newer supported editors can import that baseline, while a project saved only in a newer serialization format cannot reliably be reopened in the oldest editor. The shared package pins in `Packages/manifest.json` are also intentionally conservative; do not upgrade packages from just one editor and commit the result without rerunning the full matrix. uGUI is a direct dependency because Unity 6.5 no longer supplies it transitively through the Render Pipeline Core package.
+
+When switching editor versions, close Unity first. If Unity reports stale imports, delete the generated `Library` directory and reopen the project; do not copy a `Library` directory between editor versions. Any automatic changes made by a newer editor should be reviewed before committing so the `6000.0.58f2` baseline is preserved.
+
+The compatibility contract lives in `Tools/UnityCompatibility.json`. To check its project marker and package pins without Unity:
+
+```bash
+python3 Tools/CheckUnityCompatibility.py
+```
+
+To compile and run the project validator in isolated copies under all three installed editors:
+
+```bash
+python3 Tools/RunUnityCompatibilityMatrix.py \
+  --editor 6000.0.58f2=/path/to/6000.0.58f2/Editor/Unity \
+  --editor 6000.3.22f1=/path/to/6000.3.22f1/Editor/Unity \
+  --editor 6000.5.9f1=/path/to/6000.5.9f1/Editor/Unity
+```
+
+The runner also discovers standard Unity Hub install locations. Matrix logs are written to `Artifacts/unity-compatibility/` and ignored by Git.
+
 ## Debug & validation
 
 - **F3** — runtime overlay: FPS, state, wave/enemy counts, plus cheats (1 heal, 2 ammo, 3 god mode, 4 kill all, 5 restore)
-- **Tools → Rogue Arena → Validate Project** — checks build scenes, layers, URP setup, content catalog sanity and cross-references
+- **Tools → Rogue Arena → Unity Compatibility** — checks the current editor, project marker and shared package pins
+- **Tools → Rogue Arena → Validate Project** — runs compatibility checks plus build scenes, layers, URP setup, content catalog sanity and cross-references
 
 ## Project layout
 

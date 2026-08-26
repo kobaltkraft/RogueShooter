@@ -815,6 +815,26 @@ check("player death publishes once", "PlayerDied?.Invoke" in vitals_src
       or "PlayerDied?.Invoke" in read("Player/PlayerFactory.cs"))
 
 # --------------------------------------------------------------------------
+# 15. Unity editor compatibility matrix
+# --------------------------------------------------------------------------
+section("15. Unity editor compatibility matrix")
+
+from CheckUnityCompatibility import run_checks as run_compatibility_checks
+
+compatibility_errors = run_compatibility_checks(verbose=False)
+check("compatibility contract, baseline marker and package pins agree",
+      not compatibility_errors, str(compatibility_errors))
+
+editor_validator = read("Editor/ProjectValidator.cs")
+compatibility_validator = read("Editor/UnityCompatibility.cs")
+check("project validator runs Unity compatibility checks",
+      "UnityCompatibility.Validate(Info, Error)" in editor_validator)
+check("batch-mode compatibility validation entry point exists",
+      "ValidateForCi" in editor_validator and "EditorApplication.Exit" in editor_validator)
+check("unsupported editors are detected by exact Application.unityVersion",
+      "Application.unityVersion" in compatibility_validator and "FindEditor" in compatibility_validator)
+
+# --------------------------------------------------------------------------
 # Summary
 # --------------------------------------------------------------------------
 print("\n" + "=" * 60)

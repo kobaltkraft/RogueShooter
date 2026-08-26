@@ -1,6 +1,6 @@
 # RogueArena — Final QA Report
 
-**Scope:** Final stabilization pass over all 78 runtime scripts, the input asset, project settings, and the runtime-generated content catalog. Static review of every script + automated 161-check static suite (`Tools/QaStaticTests.py`, results in `QA_TEST_RESULTS.txt`).
+**Scope:** Final stabilization pass over all 78 runtime scripts, the input asset, project settings, and the runtime-generated content catalog. Static review of every script + automated 165-check static suite (`Tools/QaStaticTests.py`, results in `QA_TEST_RESULTS.txt`).
 
 **Environment:** Unity 6.0 (6000.0.58f2), URP 17.0.4, Input System 1.14.2, AI Navigation 2.0.9.
 **Constraint:** No .NET compiler was available in the QA sandbox — all verification is static analysis (manual per-script review, grep cross-reference sweeps, brace/quote balance checks, and the automated invariant suite). A final compile pass in the Unity Editor is still required before shipping (see *Final verification*).
@@ -32,7 +32,7 @@
 | 19 | Edge cases | **PASS** | Negative-damage blocks, death-once, re-entrant restart guard, off-navmesh boss snap |
 | 20 | Game feel | **PASS** | Combo window/cap, hit markers, screen shake, FOV kicks, damage numbers — consistent |
 | 21 | Compatibility | **NEEDS WORK → fixed** | Invalid hex (`g`) in a Gamepad binding GUID in `RogueArena.inputactions`; fixed this pass (asset is documentation-only) |
-| 22 | Final verification | **PASS (static)** | 161/161 automated checks pass; editor compile + playtest still required |
+| 22 | Final verification | **PASS (static)** | 165/165 automated checks pass; editor compile + playtest still required |
 
 **Overall: no known compile-blocking or gameplay-blocking issues remain.**
 

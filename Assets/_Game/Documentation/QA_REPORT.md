@@ -1,6 +1,6 @@
 # RogueArena — Pre-Alpha QA Report
 
-**Scope:** Full audit & repair pass over all 78 runtime scripts, 4 scenes, project settings, and the runtime-generated content catalog. Static review + targeted repairs; verified with a 161-check automated static test suite (`Tools/QaStaticTests.py`, results in `QA_TEST_RESULTS.txt`).
+**Scope:** Full audit & repair pass over all 78 runtime scripts, 4 scenes, project settings, and the runtime-generated content catalog. Static review + targeted repairs; verified with a 165-check automated static test suite (`Tools/QaStaticTests.py`, results in `QA_TEST_RESULTS.txt`).
 
 **Environment:** Unity 6.0 (6000.0.58f2), URP 17.0.4, Input System 1.14.2, AI Navigation 2.0.9.
 **Constraint:** No .NET compiler was available in the QA sandbox — all verification is by static analysis, grep-based invariant checks, and math replication tests. A compile pass in the Unity Editor is still required (see *Manual verification*).
@@ -105,7 +105,7 @@
 
 ## Automated tests
 
-`Tools/QaStaticTests.py` — **161 checks, 0 failures** (run `python3 Tools/QaStaticTests.py` from the repo root; full log in `Assets/_Game/Documentation/QA_TEST_RESULTS.txt`). Covers:
+`Tools/QaStaticTests.py` — **165 checks, 0 failures** (run `python3 Tools/QaStaticTests.py` from the repo root; full log in `Assets/_Game/Documentation/QA_TEST_RESULTS.txt`). Covers:
 
 - structure & compile-risk (file inventory, brace balance, banned APIs)
 - hot-path hygiene (allocations / `GetComponent` / `.material` in `Update`)

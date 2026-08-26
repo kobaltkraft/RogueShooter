@@ -1,0 +1,35 @@
+{
+  "baselineVersion": "6000.0.58f2",
+  "supportedEditors": [
+    {
+      "version": "6000.0.58f2",
+      "revision": "92dee566b325"
+    },
+    {
+      "version": "6000.3.22f1",
+      "revision": "1c726e1fb402"
+    },
+    {
+      "version": "6000.5.9f1",
+      "revision": "b57deb96f08d"
+    }
+  ],
+  "packages": [
+    {
+      "name": "com.unity.ai.navigation",
+      "version": "2.0.9"
+    },
+    {
+      "name": "com.unity.inputsystem",
+      "version": "1.14.2"
+    },
+    {
+      "name": "com.unity.render-pipelines.universal",
+      "version": "17.0.4"
+    },
+    {
+      "name": "com.unity.ugui",
+      "version": "2.0.0"
+    }
+  ]
+}
