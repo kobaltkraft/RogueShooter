@@ -188,6 +188,12 @@
   PASS  player ResetState exists for restarts
   PASS  player death publishes once
 
+=== 15. Unity editor compatibility matrix ===
+  PASS  compatibility contract, baseline marker and package pins agree
+  PASS  project validator runs Unity compatibility checks
+  PASS  batch-mode compatibility validation entry point exists
+  PASS  unsupported editors are detected by exact Application.unityVersion
+
 ============================================================
-RESULT: 161 passed, 0 failed, 0 warnings
+RESULT: 165 passed, 0 failed, 0 warnings
 ============================================================
