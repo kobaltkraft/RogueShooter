@@ -52,6 +52,10 @@ namespace RogueArena.AI
         public float attackRange = 32f;
         public float preferredRange = 14f;
 
+        [Header("Combat")]
+        [Tooltip("Damage per shoulder-cannon projectile hit (splash deals a fraction of this).")]
+        public float attackDamage = 25f;
+
         [Header("Phases (ordered by healthFraction, descending)")]
         public List<BossPhase> phases = new List<BossPhase>();
 

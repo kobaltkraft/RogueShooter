@@ -34,7 +34,7 @@ namespace RogueArena.Core
 
         // --- Score / combo ---
         public static Action<long> ScoreChanged;
-        public static Action<int, float> ComboChanged;           // multiplier, seconds remaining
+        public static Action<float, float> ComboChanged;         // multiplier, seconds remaining
         public static Action<string, Color, float> Notification; // message, color, duration
 
         // --- Powerups / pickups ---

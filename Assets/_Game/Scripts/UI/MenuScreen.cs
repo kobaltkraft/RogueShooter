@@ -297,8 +297,8 @@ namespace RogueArena.UI
                         () =>
                         {
                             Services.Progression?.TryPurchaseWeaponUpgrade(weapon.id, trackId,
-                                WeaponUpgradeTracks.CostAtTier(
-                                    Services.Progression.WeaponUpgradeTier(weapon.id, trackId), trackId),
+                                WeaponUpgradeTracks.CostAtTier(trackId,
+                                    Services.Progression.WeaponUpgradeTier(weapon.id, trackId)),
                                 WeaponUpgradeTracks.MaxTier(trackId));
                             ShowTab();
                         });

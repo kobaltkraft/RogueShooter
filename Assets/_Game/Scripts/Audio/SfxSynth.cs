@@ -74,8 +74,9 @@ namespace RogueArena.Audio
 
         static void Distort(float[] buffer, float drive)
         {
+            float driveOut = (float)System.Math.Tanh(drive);
             for (int i = 0; i < buffer.Length; i++)
-                buffer[i] = Mathf.Tanh(buffer[i] * drive) / Mathf.Tanh(drive);
+                buffer[i] = (float)System.Math.Tanh(buffer[i] * drive) / driveOut;
         }
 
         static float Peak(float[] buffer)

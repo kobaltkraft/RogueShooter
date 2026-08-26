@@ -68,13 +68,15 @@ namespace RogueArena.Player
             volume.isGlobal = true;
             var profile = ScriptableObject.CreateInstance<UnityEngine.Rendering.VolumeProfile>();
             profile.name = "GameplayPost";
-            if (profile.Add<UnityEngine.Rendering.Universal.Bloom>(out var bloom))
+            var bloom = profile.Add<UnityEngine.Rendering.Universal.Bloom>();
+            if (bloom != null)
             {
                 bloom.intensity.Override(0.55f);
                 bloom.threshold.Override(1.05f);
                 bloom.scatter.Override(.75f);
             }
-            if (profile.Add<UnityEngine.Rendering.Universal.Vignette>(out var vignette))
+            var vignette = profile.Add<UnityEngine.Rendering.Universal.Vignette>();
+            if (vignette != null)
             {
                 vignette.intensity.Override(.3f);
                 vignette.smoothness.Override(.45f);

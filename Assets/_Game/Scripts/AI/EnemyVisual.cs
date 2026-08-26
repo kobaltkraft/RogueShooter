@@ -44,7 +44,7 @@ namespace RogueArena.AI
         public void AttachHealth(Health health)
         {
             if (health == null) return;
-            health.Damaged += _ => Flash(Color.white, .12f);
+            health.Damaged += (_, _) => Flash(Color.white, .12f);
         }
 
         public void Flash(Color color, float duration)

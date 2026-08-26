@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using Unity.AI.Navigation;
 using RogueArena.AI;
 using RogueArena.Core;
 using RogueArena.Player;
@@ -307,10 +308,14 @@ namespace RogueArena.Environment
             RenderSettings.fogMode = FogMode.ExponentialSquared;
             RenderSettings.fogColor = def.fogColor;
             RenderSettings.fogDensity = def.fogDensity;
-            RenderSettings.ambientMode = UnityEngine.Rendering.AmbientMode.Trilight;
-            RenderSettings.ambientSky = def.fogColor * 1.4f;
-            RenderSettings.ambientEquator = def.fogColor;
-            RenderSettings.ambientGround = def.fogColor * .5f;
+
+            // Ambient tint follows the arena's fog hue. Flat mode +
+            // RenderSettings.ambientLight is the one ambient API both the
+            // built-in pipeline and URP respect at runtime (URP's trilight
+            // colours live on the URP asset and are owned by the Lighting
+            // window, so they are not touched here).
+            RenderSettings.ambientMode = UnityEngine.Rendering.AmbientMode.Flat;
+            RenderSettings.ambientLight = def.fogColor;
         }
 
         // ================================================================ industrial

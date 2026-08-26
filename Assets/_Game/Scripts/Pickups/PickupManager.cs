@@ -125,7 +125,7 @@ namespace RogueArena.Pickups
             if (random == null) return;
 
             float currencyChance = definition != null ? definition.currencyDropChance : .08f;
-            int scoreValue = definition != null ? definition.scoreValue : 100;
+            long scoreValue = definition != null ? definition.scoreValue : 100;
 
             if (currencyChance > 0f && random.Chance(currencyChance))
             {
