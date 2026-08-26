@@ -59,6 +59,8 @@ Every arena has AI cover points, spawn points, weapon/powerup pads, explosive ba
 
 `6000.0.58f2` is intentionally the serialized project baseline. Both newer supported editors can import that baseline, while a project saved only in a newer serialization format cannot reliably be reopened in the oldest editor. The shared package pins in `Packages/manifest.json` are also intentionally conservative; do not upgrade packages from just one editor and commit the result without rerunning the full matrix. uGUI is a direct dependency because Unity 6.5 no longer supplies it transitively through the Render Pipeline Core package.
 
+The manifest also pins the built-in modules the code depends on (`com.unity.modules.ai`, `.audio`, `.jsonserialize`, `.particlesystem`, `.physics`, all at `1.0.0`). Built-in modules can be toggled off per-project in the Package Manager, and a disabled module turns into hard compile errors (`CS1069 … forwarded to assembly UnityEngine.<Module>Module`); pinning them in the manifest keeps the project compiling regardless of local module toggles. Do not remove a pin while its APIs are still in use.
+
 When switching editor versions, close Unity first. If Unity reports stale imports, delete the generated `Library` directory and reopen the project; do not copy a `Library` directory between editor versions. Any automatic changes made by a newer editor should be reviewed before committing so the `6000.0.58f2` baseline is preserved.
 
 The compatibility contract lives in `Tools/UnityCompatibility.json`. To check its project marker and package pins without Unity:

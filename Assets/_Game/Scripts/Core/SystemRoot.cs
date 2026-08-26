@@ -4,6 +4,7 @@ using RogueArena.Content;
 using RogueArena.Persistence;
 using RogueArena.Progression;
 using RogueArena.VFX;
+using RogueArena.Visual;
 
 namespace RogueArena.Core
 {

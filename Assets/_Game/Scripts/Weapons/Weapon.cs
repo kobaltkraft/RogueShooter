@@ -256,7 +256,7 @@ namespace RogueArena.Weapons
         {
             if (Physics.Raycast(origin, direction, out RaycastHit hit, Definition.range, Layers.BulletHitMask, QueryTriggerInteraction.Ignore))
             {
-                bool head = HitZone.IsHead(hit.collider);
+                bool head = HitZoneMarker.IsHead(hit.collider);
                 IDamageable target = hit.collider.GetComponentInParent<IDamageable>();
                 bool killed = false;
                 bool damaged = false;

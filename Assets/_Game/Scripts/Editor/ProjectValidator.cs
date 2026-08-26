@@ -106,7 +106,7 @@ namespace RogueArena.EditorTools
             }
 
             // ---- content catalog smoke test ----
-            var initialize = typeof(Core.GameContent).GetMethod("Initialize",
+            var initialize = typeof(Content.GameContent).GetMethod("Initialize",
                 System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Static);
             if (initialize == null)
             {

@@ -205,7 +205,7 @@ namespace RogueArena.AI
             head.name = "Head";
             float scale = def.kind == EnemyKind.Tank ? .7f : .5f;
             SetPart(head, parent, new Vector3(0f, 1.55f * def.bodyScale, 0f), Vector3.one * scale, MaterialLibrary.EnemyBody);
-            head.AddComponent<HitZone>().zone = HitZone.Head;
+            head.AddComponent<HitZoneMarker>().zone = HitZone.Head;
             return head.transform;
         }
 

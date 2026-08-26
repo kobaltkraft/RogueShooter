@@ -1,5 +1,6 @@
 using UnityEngine;
 using RogueArena.AI;
+using RogueArena.Environment;
 using RogueArena.Pickups;
 using RogueArena.Player;
 using RogueArena.Waves;

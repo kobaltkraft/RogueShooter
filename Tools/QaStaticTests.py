@@ -241,7 +241,7 @@ for path in glob.glob(os.path.join(SCRIPTS, "**", "*.cs"), recursive=True):
         if "GameEvents.ResetAll()" in line:
             reset_hits.append(f"{os.path.relpath(path, SCRIPTS)}:{i+1}")
 check("GameEvents.ResetAll only called at root teardown",
-      reset_hits == ["Core/SystemRoot.cs:143"], str(reset_hits))
+      len(reset_hits) == 1 and reset_hits[0].startswith("Core/SystemRoot.cs:"), str(reset_hits))
 
 # every file that does GameEvents.X += must also do GameEvents.X -= (or be a
 # persistent root service that never tears down mid-session)

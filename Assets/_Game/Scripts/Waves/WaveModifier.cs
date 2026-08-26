@@ -1,6 +1,7 @@
 using UnityEngine;
 using RogueArena.Core;
 using RogueArena.Player;
+using RogueArena.Weapons;
 
 namespace RogueArena.Waves
 {

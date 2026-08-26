@@ -2,6 +2,7 @@ using UnityEngine;
 using RogueArena.Audio;
 using RogueArena.Combat;
 using RogueArena.Core;
+using RogueArena.Weapons;
 
 namespace RogueArena.Player
 {

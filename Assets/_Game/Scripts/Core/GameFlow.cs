@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using RogueArena.Content;
 using RogueArena.Persistence;
+using RogueArena.Waves;
 
 namespace RogueArena.Core
 {

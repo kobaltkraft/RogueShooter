@@ -62,7 +62,7 @@ namespace RogueArena.AI
             core.transform.localPosition = new Vector3(0f, 2.6f, 1.15f);
             core.transform.localScale = Vector3.one * .8f;
             core.GetComponent<Renderer>().sharedMaterial = MaterialLibrary.GlowRed;
-            var hitZone = core.AddComponent<HitZone>();
+            var hitZone = core.AddComponent<HitZoneMarker>();
             hitZone.zone = HitZone.Head;
         }
 

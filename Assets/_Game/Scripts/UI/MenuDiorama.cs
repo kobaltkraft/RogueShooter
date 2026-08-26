@@ -1,6 +1,7 @@
 using UnityEngine;
 using RogueArena.AI;
 using RogueArena.Core;
+using RogueArena.Environment;
 using RogueArena.Visual;
 
 namespace RogueArena.UI
